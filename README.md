@@ -20,10 +20,10 @@ Goals:
 * [License](#license)
 
 # Installation
-Use the heroku link
+Use the heroku link [App Link](https://fitnesstracker10.herokuapp.com/)
 
 # Usage
-Use the heroku link
+Use the heroku link Use the heroku link [App Link](https://fitnesstracker10.herokuapp.com/)
 
 The homepage will ask you to continue workout or add a new workout. The user will select add a new workout.
 
