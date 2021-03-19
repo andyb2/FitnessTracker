@@ -9,7 +9,7 @@ Goals:
 1. Create a server for this application
 2. Create a mongo schema
 3. Run the seeds using the schema
-4. Create routing for for all the server requests
+4. Create routing for api and html requests 
 5. All the front-end code should be functional
 
 # Table of Contents
