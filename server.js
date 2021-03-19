@@ -1,14 +1,61 @@
 const express = require("express");
-const app = express();
+const mongoose = require("mongoose");
+const db = require('./models/');
+const { updateOne } = require("./models/workout");
+// const router = require("express").Router();
+
 const PORT = process.env.PORT || 5000;
+
+
+const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
 app.use(express.static("public"));
 
-app.get('/', (req, res) => {
-    res.redirect('/index.html')
+mongoose.connect("mongodb://localhost/Fitness", {
+    useNewUrlParser: true,
+    useFindAndModify: false
+});
+
+app.get('/exercise', (req, res) => {
+    res.redirect('/exercise.html')
+});
+
+app.get('/stats', (req, res) => {
+    res.redirect('/stats.html')
+});
+
+app.post('/api/workouts', async (req, res) => {
+    const postWorkout = await db.Workout.create({})
+    res.json(postWorkout)
+});
+
+app.get('/api/workouts', async (req, res) => {
+    const getWorkout = await db.Workout.aggregate([{
+        $addFields: {
+            totalDuration: {
+                $sum: '$exercises.duration',
+            }
+        }
+    }])
+    console.log(getWorkout)
+    res.json(getWorkout)
+});
+
+app.put('/api/workouts/:id', async (req, res) => {
+    const id = req.params.id
+    const body = req.body
+    const updateWorkout = await db.Workout.findByIdAndUpdate(
+        id,
+        {
+            $push:
+            {
+                exercises: body
+            }
+        }
+    )
+    res.send(updateWorkout)
 })
 
 app.listen(PORT, function () {
