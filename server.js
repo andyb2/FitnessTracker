@@ -1,11 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const db = require('./models/');
-const { updateOne } = require("./models/workout");
-// const router = require("express").Router();
 
 const PORT = process.env.PORT || 5000;
-
 
 const app = express();
 
